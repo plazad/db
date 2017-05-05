@@ -1,0 +1,6 @@
+for $x in doc("t1.xml")/Proj3/student
+    for $y in $x/course
+    return 
+     if ($y/name="CSE462")
+        then <res>{data($x/@name)}, {data($y/grade)}</res>
+        else ()  

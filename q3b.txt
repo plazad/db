@@ -1,0 +1,11 @@
+for $course in distinct-values(doc("t1.xml")/Proj3/student/course/name)
+return
+ <Courses>
+            {for $x in $course
+            let $total := doc("t1.xml")/Proj3/student/course[name = $course]/grade
+            where avg($total) >= 3
+            return <res>{data($x)}, {data(avg($total))}</res>
+                
+            }
+            
+ </Courses>       

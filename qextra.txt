@@ -1,0 +1,32 @@
+xquery version "3.1";
+<Proj3>
+for $course in distict-values("p3.t1.xml")/Proj3/student//name
+order by $course
+return <course name='{$course}' >
+    <students>
+        {for $stud in Proj3/student
+            return 
+                if ($stud//name = $course) 
+                then <student>{data($stud/@name)}, {data($stud/course/grade)}</student>
+                else()
+            
+        }
+        </students>
+
+    </course>
+    
+</Proj3>
+
+
+
+
+<!DOCTYPE Proj3[
+
+	<!ELEMENT Proj3 (course+)>
+	<!ELEMENT course (students*)>
+	<!ATTLIST course name CDATA #REQUIRED>
+	<!ELEMENT students (student)>
+	<!ELEMENT student (name, grade)>
+	<!ELEMENT name (#PCDATA)>
+    <!ELEMENT grade (#PCDATA)>
+]>
